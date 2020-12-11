@@ -1,0 +1,44 @@
+<svg viewBox="-4 -4 108 108" width="150" height="150" 
+  xmlns="http://w3.org/2000/svg"
+>
+
+  <circle fill="none" stroke-width="4"
+    cx="50" cy="50" r="50" class="outer"/>
+  <g *ngFor="let note of (notes$ | async); let i = index" 
+    (click)="noteClick($event, note)"
+  >
+    <path
+      [attr.d]="arcCoords[i]"  
+      [attr.fill]="note.style.background"
+    />
+    <text 
+      [attr.x]="getLetterCoordX(i)" 
+      [attr.y]="getLetterCoordY(i)"
+      [attr.fill]="note.style.color"
+    >
+        {{note.name}}
+    </text>
+  </g>
+
+  <circle cx="50" cy="50" r="30" 
+    [matMenuTriggerFor]="menu"/>
+  <text class="scale" x="50" y="50">{{scaleName}}</text>
+
+  <!--
+    <text class="degree" 
+      [attr.x]="getDegreeCoordX(i)" 
+      [attr.y]="getDegreeCoordY(i)">
+        {{(getStyle(note.degree).background === "#555") ? note.degree+1 : ''}}
+    </text>
+  <circle fill="none" stroke="silver" cx="50" cy="50" r="50" class="outer"/>
+  <circle fill="none" stroke="silver" cx="50" cy="50" r="30"/>
+  -->
+</svg>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item
+    *ngFor="let s of scaleOptions"
+    (click)="scaleClick($event, s)">
+      {{s.name}}
+  </button>
+</mat-menu>
+

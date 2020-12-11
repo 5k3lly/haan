@@ -1,0 +1,33 @@
+<svg [attr.viewBox]="'0 0 '+(tuning|async).length*20+' '+((frets|async)+1)*20" 
+  xmlns="http://www.w3.org/2000/svg">
+  <ng-container *ngFor="let string of notes | async; index as i">
+    <line [attr.x1]="10+i*20"
+      [attr.y1]="(frets|async)*20"
+      [attr.x2]="10+i*20"
+      y2="20" />
+ 
+    <line *ngFor="let note of string; index as j"
+      [attr.y1]="20+j*20"
+      [attr.x1]="((tuning|async).length*20)-10"
+      [attr.y2]="20+j*20"
+      x2="10" />
+  </ng-container>
+     
+  <ng-container *ngFor="let string of notes | async; index as i">
+    <g *ngFor="let note of string; index as j">
+      <circle (click)="noteClick()"
+        [attr.opacity]="note.chromaShadeStyle.opacity"
+        [attr.fill]="note.chromaShadeStyle.fill"
+        [attr.cx]="i*20+10" [attr.cy]="j*20+10" r="6" 
+        [attr.stroke]="note.highlight ? '#8d9dfc' : null"
+        stroke-width="2" /> 
+      <text [attr.x]="i*20+10" [attr.y]="j*20+10"
+        [attr.fill]="note.chromaShadeStyle.fg">
+      
+        {{note.letter()}}
+      </text>
+ 
+    </g>
+  </ng-container>
+ 
+</svg>

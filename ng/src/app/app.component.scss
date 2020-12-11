@@ -1,0 +1,33 @@
+// that is WAY easier than screwing around with _typography.scss..
+h2, h3, p {
+  margin: 12px;
+}
+mat-toolbar {
+  justify-content: space-between;
+
+  &.handheld {
+    position: fixed;
+    bottom: 0;
+  } 
+
+  background-color: #b7a672;
+  color: #39180e;
+}
+.fab-container {
+  position: fixed;
+  z-index: 100;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > * {
+    margin: 8px;
+    background: #804b00;
+    color: #fae3b1;
+  }
+}
+.mat-bottom-sheet-container {
+  /* max-height: 200vh */
+}
